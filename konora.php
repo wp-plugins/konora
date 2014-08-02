@@ -4,7 +4,7 @@
  * Plugin Name: Form Raccogli Dati Konora
  * Plugin URI: http://blog.konora.com/plugin/
  * Description: Converti le visite al tuo sito in contatti per il tuo buisness
- * Version: 0.4
+ * Version: 0.5
  * Author: Konora ltd
  * Author URI: http://www.konora.com
  * License: GPLv2 or later

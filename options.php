@@ -3,52 +3,12 @@
 function konora_option_help() {
    ?>
 
-   <h2>Come usare il plug-in di Konora</h2>
+   <h2>Documentazione</h2>
 
-   <h3>Recuperare il codice del circolo</h3>
    <p>
-      Per inserire i contatti nei tuoi circoli devi prima prendere il codice 
-      seguendo questi semplici passaggi:      
-   </p>
-
-   <ol>
-      <li>apri il circolo dove vuoi che vengano salvati i contatti su Konora;</li>
-      <li>nel box che si apre copia il codice che trovi in alto a destra dopo la scritta 'codice:'</li>
-   </ol>
-
-   <h3>Moduli di raccolta dati</h3>
-   <p>
-      Per convertire il traffico del tuo sito web in contatti per il tuo buisness
-      ti serve un modulo apposito. Seguendo le istruzioni di seguito potrai
-      creare le tue pagine di raccolta dati (lead generation).
-   </p>
-
-   <h4>All'interno di una pagina o di un articolo</h4>
-   <ol>
-      <li>Per inserire un form di Konora in una pagina scrivi 
-         <code>[konora circle="######"]</code> dentro un articolo;</li>
-      <li>sostituendo i
-         caratteri ###### con il codice del circolo che hai preso da Konora
-         (vedi istruzioni in alto a questa pagina).</li>
-   </ol>
-   
-   <a4>E' possibile inserire dei campi opzionali per definire l'aspetto e 
-   funzionalit&agrave; pi&ugrave; specifiche. Queste opzioni sono:</a4>
-   <ol>
-       <li><code>align="vertical"</code> - visualizza un form verticale;</li>
-       <li><code>align="horizontal"</code> - visualizza un form orizzontale;</li>
-   </op>
-   <h4>Tramite widjet</h4>
-   <ol>
-      <li>Dal men&ugrave; 'widjet' in 'apparence' &egrave; possibile inserire il 
-         form di Konora in uno spazio widjet nel tuo sito.</li>
-      <li>Inserisci nell'apposito campo il codice del circolo</li>
-   </ol>
-
-   <h3>Area riservata</h3>
-   <p>
-       Tramite il plugin &egrave; possibile gestire dei contenuti riservati 
-       agli utenti registrati.
+      <a href="http://www.konora.net/it/aiuto/" target="_blank">
+         Scarica il pdf con la documentazione di questo plugin.
+      </a>
    </p>
    <?php
 }

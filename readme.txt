@@ -1,8 +1,8 @@
 === Plugin Name ===
 Tags: konora, newsletter, autoresponder
-Requires at least: 0.1
-Tested up to: 3.4
-Stable tag: 4.3
+Requires at least: 3.4
+Tested up to: 3.9.1
+Stable tag: 0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,8 @@ tuo blog con i servizzi messi a disposizione dal portale [Konora]: www.konora.co
 == Changelog ==
 
 = 0.5 =
-* Aggiunta la scelta dei form orizzontali o verticali
+* Aggiunto la possibilità di scegliere un foglio di stile diverso per ogni form
+* Aggiunte tutte le funzioni di modifica di un form nel widjet
 
 = 0.4 =
 * Verifica della corretta formattazione della mail nel form e reso campo obbligatorio
