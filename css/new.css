@@ -1,0 +1,110 @@
+#konora-wrapper-new {
+    background: url('https://dl.dropboxusercontent.com/u/16675108/konora/facebook/bg-lp-facebook.jpg');
+    padding-top: 25px;
+    font-family: 'tahoma';
+    margin: 0;
+}
+
+#konora-wrapper-new .konora-form {
+    padding: 40px;
+    color: white;
+    background: url('https://dl.dropboxusercontent.com/u/16675108/konora/facebook/bg-nero-sfumato.png');
+    width: 450px;
+    margin: 0 auto;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 10px;
+
+}
+
+#konora-wrapper-new .konora-form h2 {
+    font-size: 40px;
+    margin: 0 0 10px 0;
+    padding: 0px;
+}
+
+#konora-wrapper-new .konora-form h3 {
+    font-size: 25px;
+    font-weight: normal;
+    margin: 0px;
+    padding: 0px;
+}
+
+#konora-wrapper-new .konora-form p {
+    font-size: 12px;
+    font-weight: normal;
+    color: #ddd;
+}
+
+#konora-wrapper-new .konora-form form {
+    margin: 0;
+    padding: 0;
+}
+
+#konora-wrapper-new .konora-form input[type=text] {
+    border: 2px #fc0 solid;
+    padding: 13px 30px 10px 30px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#konora-wrapper-new .konora-form input[type=text]::-webkit-input-placeholder {
+    text-align: center;
+    color: #999;
+    font-size: 15px;
+}
+
+#konora-wrapper-new .konora-form input:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+    color: #999;
+    font-size: 15px;
+}
+
+#konora-wrapper-new .konora-form input::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+    color: #999;  
+    font-size: 15px;
+}
+
+#konora-wrapper-new .konora-form input[type=text]:-ms-input-placeholder {  
+    text-align: center;
+    color: #999;  
+    font-size: 15px;
+}
+
+#konora-wrapper-new .konora-form input[type=submit] {
+    height: 5em;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 10px;
+    border: 1px solid #003366;
+    background-color: #ffCC33;
+    color: #003366;
+    font-weight: bold;
+    width: 60%;
+}
+
+#konora-wrapper-new .konora-form input[type=submit]:hover {
+    background-color: #ff9933;
+}
+
+#konora-wrapper-new .konora-form #konora-footer {
+    margin: 0 auto;
+    padding-bottom: 100px;
+    text-align: center;
+    color: black;
+    font-size: 12px;
+}
+
+#lp-konora-footer p {
+    margin-bottom: 2em;
+
+}
+
+#lp-konora-footer img {
+    display: inline;
+}

@@ -1,8 +1,8 @@
-=== Plugin Name ===
+=== Konora Form ===
 Tags: konora, newsletter, autoresponder
 Requires at least: 3.4
 Tested up to: 3.9.1
-Stable tag: 0.5
+Stable tag: 0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,13 @@ tuo blog con i servizzi messi a disposizione dal portale [Konora]: www.konora.co
 1. Page of advertising
 
 == Changelog ==
+
+= 0.6 =
+* Velocizzato l'esecuzione del plugin
+* Migliorato il supporto a form multipli all'interno della stessa pagina
+* Sostituito l'uso delle librerie curl con l'istruzione file_get_contents() per migliorare la compatibilita'
+* Aggiunto il pdf della documentazione all'interno del plugin
+* Corretti bug minori
 
 = 0.5 =
 * Aggiunto la possibilità di scegliere un foglio di stile diverso per ogni form

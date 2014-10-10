@@ -41,44 +41,28 @@ function konora_do_reserved_area($atts, $content = null) {
 function konora_print_form($atts) {
    global $konora;
 
-   $atts['style'] = $atts['style'] == '' ? 'vertical' : $atts['style'];
-   $atts['button_text'] = $atts['button_text'] == '' ? 'Invia' : $atts['button_text'];
-   $label = $atts['label'] == 'on' or ! $atts['label'] == '' ? TRUE : FALSE;
-
+   $style = $atts['style'] == '' ? 'vertical' : $atts['style'];
+   $btn_text = (isset($atts['button_text']) and $atts['button_text'] == '') ? $atts['button_text'] : 'Invia';
+   $label = (isset($atts['label']) and ( $atts['label'] == 'on' or ! $atts['label'] == '' )) ? TRUE : FALSE;
+   $background = (isset($atts['background']) and $atts['background'] != '') ? 'background-color: ' . $atts['background'] : NULL;
+   $color = (isset($atts['color']) and $atts['color'] != '') ? 'color: ' . $atts['color'] : NULL;
+   $border_color = (isset($atts['border_color']) and $atts['border_color'] != '') ? 'border-color: ' . $atts['border_color'] : NULL;
+   $text = (isset($atts['text']) and $atts['text'] != '') ? $atts['text'] : NULL;
+   $btn_background = (isset($atts['button_background']) and $atts['button_background'] != '') ? 'background-color: ' . $atts['button_background'] : NULL;
+   $btn_color = (isset($atts['button_color']) and $atts['button_color'] != '') ? 'color: ' . $atts['button_color'] : NULL;
+   $cirlce = $atts['circle'];
+    
    $plugin_url = plugins_url(null, __FILE__);
-   $javascript = plugins_url('js/konora.js', __FILE__);
-   $css = plugins_url("css/{$atts['style']}.css", __FILE__);
+   $css = plugins_url("css/$style.css", __FILE__);
 
-   $return = "<link href=\"{$css}\" rel=\"stylesheet\" type=\"text/css\" />";
-   $return .= "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.10.2.min.js\"></script>";
-   $return .= "<script language=\"javascript\" type=\"text/javascript\">var plugin_konora_url = '$plugin_url';</script>";
-   $return .= "<script language=\"javascript\" type=\"text/javascript\" src=\"{$javascript}\"></script>";
+   wp_enqueue_script('konora', plugins_url( 'js/konora.js' , __FILE__ ), array('jquery'));
 
    if ($atts['circle'] == "") {
-      $return .= '<span class="konora-error">r: no circle set!</span>';
+      return '<span class="konora-error">error: no circle set!</span>';
    } else {
-      $return .= "<div id=\"konora-wrapper-{$atts['style']}\">
-            <form id=\"konora-form\" action=\"$konora/api/form/{$atts['circle']}\" method=\"GET\" "
-            . "style=\"background-color: {$atts['background']}; color: {$atts['color']}; border-color: {$atts['border_color']}\">";
-
-      $return .= $atts['text'] != '' ? "<p style=\"display:block\">{$atts['text']}</p>" : NULL;
-
-      $return .= "<p>";
-
-      $return .= $label ? "<label for=\"konora-name\">Nome: </label>" : NULL;
-
-      $return .= "<input id=\"konora-name\" placeholder=\"inserisci il nome\" name=\"konora-name\" type=\"text\">"
-              . "</p><p>";
-
-      $return .= $label ? "<label for = \"konora-email\">E-Mail: </label>" : NULL;
-
-      $return .= "<input id=\"konora-email\" placeholder=\"Inserisci l'E-Mail\" name=\"konora-email\" required type=\"text\">
-         </p><p><input type = \"submit\" value=\"{$atts['button_text']}\" style=\"background-color: {$atts['button_background']}; color: {$atts['button_color']};\"></p>
-           </form>
-        </div>";
+      // Render the settings template
+      include(sprintf("%s/templates/form.php", dirname(__FILE__)));
    }
-
-   return $return;
 }
 
 function konora_notify_new_post($post_id) {
@@ -94,18 +78,18 @@ function konora_notify_new_post($post_id) {
       ?>
 
       <html>
-         <head>
-            <title>New post at <?php bloginfo('name') ?></title>
-         </head>
-         <body>
-            <p>
-               Ciao {nome},
-            </p>
-            <p>
-               Ho appena pubblicato questo articolo:
-               <a href="<?php echo get_permalink($post->ID) ?>"><?php the_title_attribute() ?></a>.
-            </p>
-         </body>
+          <head>
+              <title>New post at <?php bloginfo('name') ?></title>
+          </head>
+          <body>
+              <p>
+                  Ciao {nome},
+              </p>
+              <p>
+                  Ho appena pubblicato questo articolo:
+                  <a href="<?php echo get_permalink($post->ID) ?>"><?php the_title_attribute() ?></a>.
+              </p>
+          </body>
       </html>
 
       <?php
@@ -155,21 +139,21 @@ function konora_registration_form() {
    $konora_sponsor = ( isset($_GET['knr']) ) ? $_GET['knr'] : '';
    ?>
    <p>
-      <label for="password">E-mail Sponsor<br/>
-         <input type="email" name="konora_sponsor" required id="konora_sponsor" class="input" value="<?php echo esc_attr(stripslashes($konora_sponsor)); ?>" size="25" />
-      </label>
+       <label for="password">E-mail Sponsor<br/>
+           <input type="email" name="konora_sponsor" required id="konora_sponsor" class="input" value="<?php echo esc_attr(stripslashes($konora_sponsor)); ?>" size="25" />
+       </label>
    </p>
 
 
    <p>
-      <label for="password">Password<br/>
-         <input id="password" class="input" required type="password" tabindex="30" size="25" value="" name="password" />
-      </label>
+       <label for="password">Password<br/>
+           <input id="password" class="input" required type="password" tabindex="30" size="25" value="" name="password" />
+       </label>
    </p>
    <p>
-      <label for="repeat_password">Ripeti password<br/>
-         <input id="repeat_password" class="input"  required type="password" tabindex="40" size="25" value="" name="repeat_password" />
-      </label>
+       <label for="repeat_password">Ripeti password<br/>
+           <input id="repeat_password" class="input"  required type="password" tabindex="40" size="25" value="" name="repeat_password" />
+       </label>
    </p>
 
 

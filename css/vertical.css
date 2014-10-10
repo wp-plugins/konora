@@ -1,4 +1,4 @@
-#konora-wrapper-vertical #konora-form {
+#konora-wrapper-vertical .konora-form {
     font-family: sans-serif; 
     background-color:#0088cc; 
     padding:1em; 
@@ -7,13 +7,13 @@
     border-radius: 10px;
 }
 
-#konora-wrapper-vertical #konora-form input {
+#konora-wrapper-vertical .konora-form input {
     margin-left: 1em; 
     width: 30%;
     background-color: white;
 }
 
-#konora-wrapper-vertical #konora-form input[type=submit] {
+#konora-wrapper-vertical .konora-form input[type=submit] {
     height: 3em;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -24,6 +24,6 @@
     font-weight: bold;
 }
 
-#konora-wrapper-vertical #konora-form input[type=submit]:hover {
+#konora-wrapper-vertical .konora-form input[type=submit]:hover {
     background-color: #ff9933;
 }

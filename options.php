@@ -6,7 +6,7 @@ function konora_option_help() {
    <h2>Documentazione</h2>
 
    <p>
-      <a href="http://www.konora.net/it/aiuto/" target="_blank">
+      <a href="<?= plugins_url( 'doc/Konora_Plugin_WordPress.pdf' , __FILE__ ); ?>" target="_blank">
          Scarica il pdf con la documentazione di questo plugin.
       </a>
    </p>
