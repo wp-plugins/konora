@@ -18,25 +18,6 @@
 
 }
 
-#konora-wrapper-new .konora-form h2 {
-    font-size: 40px;
-    margin: 0 0 10px 0;
-    padding: 0px;
-}
-
-#konora-wrapper-new .konora-form h3 {
-    font-size: 25px;
-    font-weight: normal;
-    margin: 0px;
-    padding: 0px;
-}
-
-#konora-wrapper-new .konora-form p {
-    font-size: 12px;
-    font-weight: normal;
-    color: #ddd;
-}
-
 #konora-wrapper-new .konora-form form {
     margin: 0;
     padding: 0;
@@ -90,6 +71,13 @@
 
 #konora-wrapper-new .konora-form input[type=submit]:hover {
     background-color: #ff9933;
+}
+
+#konora-wrapper-new .konora-form .konora-text {
+    font-size: 40px;
+    margin: 0 0 40px 0;
+    padding: 0px;
+    color: #ddd;
 }
 
 #konora-wrapper-new .konora-form #konora-footer {

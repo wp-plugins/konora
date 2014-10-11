@@ -8,7 +8,7 @@
     <form class="konora-form" action="<?= $konora; ?>/api/form/<?= $cirlce; ?>" method="GET" style="<?= $background; ?>;<?= $color; ?>;<?= $border_color; ?>">
 
         <?php if ($text != '') : ?>
-           <p style="display:block"><?= $text; ?></p>
+           <p class="konora-text" style="display:block"><?= $text; ?></p>
         <?php endif; ?>
            
         <p>
