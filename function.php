@@ -61,7 +61,9 @@ function konora_print_form($atts) {
       return '<span class="konora-error">error: no circle set!</span>';
    } else {
       // Render the settings template
+      ob_start();
       include(sprintf("%s/templates/form.php", dirname(__FILE__)));
+      return ob_get_clean();
    }
 }
 
