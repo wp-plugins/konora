@@ -1,0 +1,73 @@
+#konora-wrapper-lead {
+    font-family: 'tahoma';
+    margin: 0;
+}
+
+#konora-wrapper-lead .konora-form {
+    margin: 0 auto;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 10px;
+}
+
+#konora-wrapper-lead .konora-form form {
+    margin: 0;
+    padding: 0;
+}
+
+#konora-wrapper-lead .konora-form input {
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    display: block;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    width: 395px;
+    height: 50px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    
+    margin: 0 auto;
+    padding: 5px 5px;
+    text-decoration: none;
+    overflow: hidden;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    
+    
+    background-color: #EBEBEB;
+
+}
+
+#konora-wrapper-lead .konora-form input::-webkit-input-placeholder,
+#konora-wrapper-lead .konora-form input:-moz-placeholder,
+#konora-wrapper-lead .konora-form input::-moz-placeholder,
+#konora-wrapper-lead .konora-form input:-ms-input-placeholder
+{
+    text-align: center;
+    color: #999;
+    font-size: 10px;
+}    
+
+#konora-wrapper-lead .konora-form input[type=submit] {
+    border: 0px solid #003366;
+    background-color: #ff9933;
+    color: #003366;
+    text-transform: uppercase;
+}
+
+#konora-wrapper-lead .konora-form input[type=submit]:hover {
+    background-color: #ffCC33;
+}
+
+#konora-wrapper-lead .konora-form .konora-text {
+    font-size: 40px;
+    margin: 0 0 40px 0;
+    padding: 0px;
+    color: #ddd;
+}
+
+#lp-konora-footer p {
+    margin-bottom: 2em;
+}

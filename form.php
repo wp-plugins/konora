@@ -3,8 +3,9 @@
 $url = $_GET['url'];
 $name = $_GET['name'];
 $email = $_GET['email'];
+$sponsor = $_GET['sponsor'];
 
-$string = $url . '?name=' . $name . '&email=' . $email;
+$string = $url . '?name=' . $name . '&email=' . $email . '&sponsor=' . $sponsor;
 
 $response = file_get_contents($string);
 

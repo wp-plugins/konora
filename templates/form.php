@@ -1,5 +1,6 @@
 <link href="<?= $css; ?>" rel="stylesheet" type="text/css" />
 
+<script language="javascript" type="text/javascript" src="<?= plugins_url('../js/konora.js', __FILE__); ?>"></script>
 <script language="javascript" type="text/javascript">
    var plugin_konora_url = '<?= $plugin_url; ?>';
 </script>
@@ -10,24 +11,43 @@
         <?php if ($text != '') : ?>
            <p class="konora-text" style="display:block"><?= $text; ?></p>
         <?php endif; ?>
-           
-        <p>
-            <?php if ($label != '') : ?>
-               <label for="konora-name">Nome: </label>
-            <?php endif; ?>
 
-            <input id="konora-name" placeholder="inserisci il nome" name="konora-name" type="text">
-        </p>
-        <p>
-            <?php if ($label != '') : ?>
-               <label for = "konora-email">E-Mail: </label>
-            <?php endif; ?>
+        <?php if (in_array("name", $fields)) : ?>
+           <p> 
+               <?php if ($label != '') : ?>
+                  <label for="konora-name" style="<?= $color; ?>;">Nome: </label>
+               <?php endif; ?>
 
-            <input id="konora-email" placeholder="Inserisci l'E-Mail" name="konora-email" required type="text">
-        </p>
+               <input id="konora-name" placeholder="Inserisci il Nome" name="konora-name" type="text">
+           </p>
+        <?php endif; ?>
+
+        <?php if (in_array("email", $fields)) : ?>
+           <p>
+               <?php if ($label != '') : ?>
+                  <label for = "konora-email" style="<?= $color; ?>;">E-Mail: </label>
+               <?php endif; ?>
+
+               <input id="konora-email" placeholder="Inserisci l'E-Mail" name="konora-email" required type="email">
+           </p>
+        <?php endif; ?>
+
+        <?php if (in_array("phone", $fields)) : ?>
+           <p>
+               <?php if ($label != '') : ?>
+                  <label for = "konora-email">Telefono: </label>
+               <?php endif; ?>
+
+               <input id="konora-phone" placeholder="Inserisci il Telefono" name="konora-phone" type="number">
+           </p>
+        <?php endif; ?>
+
         <p>
-            <input type = "submit" value="<?= $btn_text; ?>" style="<?= $btn_background; ?>;<?= $btn_color; ?>; ">
+            <?php if ($redirect != '') : ?>
+               <input id="konora-redirect" name="konora-redirect" type="hidden" value="<?= $redirect; ?>">
+            <?php endif; ?>
+            <input id="konora-sponsor" name="konora-sponsor" type="hidden" value="<?= $sponsor; ?>">
+            <input type = "submit" value="<?= $btn_text; ?>" style="<?= $btn_background; ?>;<?= $btn_color; ?>; " />
         </p>
     </form>
 </div>
-

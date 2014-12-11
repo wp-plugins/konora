@@ -165,8 +165,7 @@ function konora_option_reserved_area() {
       }
       
       if (isset($_POST['konora_access_denied_text']))
-         update_option('konora_access_denied_text', $_POST['konora_access_denied_text']);
-
+         update_option('konora_access_denied_text', stripslashes($_POST['konora_access_denied_text']));
    }
    
    $javascript = plugins_url('js/options.js', __FILE__);

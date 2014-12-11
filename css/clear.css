@@ -1,0 +1,104 @@
+#konora-wrapper-clear {
+    font-family: 'tahoma';
+    margin: 0;
+}
+
+#konora-wrapper-clear .konora-form {
+    margin: 0 auto;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 10px;
+}
+
+#konora-wrapper-clear .konora-form form {
+    margin: 0;
+    padding: 0;
+}
+
+#konora-wrapper-clear .konora-form input[type=text],
+#konora-wrapper-clear .konora-form input[type=email],
+#konora-wrapper-clear .konora-form input[type=number] {
+    border: 0px #fc0 solid;
+    padding: 16px 15px 13px 15px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #EBEBEB;
+    width: 10em;
+}
+
+#konora-wrapper-clear .konora-form input[type=text]::-webkit-input-placeholder,
+#konora-wrapper-clear .konora-form input[type=email]::-webkit-input-placeholder, 
+#konora-wrapper-clear .konora-form input[type=number]::-webkit-input-placeholder 
+{
+    text-align: center;
+    color: #999;
+    font-size: 20px;
+}
+
+#konora-wrapper-clear .konora-form input:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+    color: #999;
+    font-size: 15px;
+}
+
+#konora-wrapper-clear .konora-form input::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+    color: #999;  
+    font-size: 15px;
+}
+
+#konora-wrapper-clear .konora-form input[type=text]:-ms-input-placeholder,
+    #konora-wrapper-clear .konora-form input[type=email]:-ms-input-placeholder,
+    #konora-wrapper-clear .konora-form input[type=number]:-ms-input-placeholder{  
+    text-align: center;
+    color: #999;  
+    font-size: 15px;
+}
+
+#konora-wrapper-clear .konora-form input[type=submit] {
+    
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 10px;
+    border: 0px solid #003366;
+    background-color: #ff9933;
+    color: #003366;
+    font-weight: bold;
+    font-size: 35px;
+    color: white;
+    width: 230px;
+    height: 63px;
+    text-transform: uppercase;
+}
+
+#konora-wrapper-clear .konora-form input[type=submit]:hover {
+    background-color: #ffCC33;
+}
+
+#konora-wrapper-clear .konora-form .konora-text {
+    font-size: 40px;
+    margin: 0 0 40px 0;
+    padding: 0px;
+    color: #ddd;
+}
+
+#konora-wrapper-clear .konora-form #konora-footer {
+    margin: 0 auto;
+    padding-bottom: 100px;
+    text-align: center;
+    color: black;
+    font-size: 12px;
+}
+
+#lp-konora-footer p {
+    margin-bottom: 2em;
+
+}
+
+#lp-konora-footer img {
+    display: inline;
+}

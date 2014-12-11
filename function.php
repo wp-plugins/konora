@@ -6,8 +6,7 @@ function konora_do_reserved_area($atts, $content = null) {
 
    $current_user = wp_get_current_user();
 
-   $url = "$konora/api/incircle?";
-   $url = "http://konora.dev.local/api/circle/" . $atts['circle'] . "/inside?";
+   $url = "http://www.konora.com/api/circle/" . $atts['circle'] . "/inside?";
 
    $fields = array(
        'user' => get_option('konora_user', ''),
@@ -16,7 +15,6 @@ function konora_do_reserved_area($atts, $content = null) {
        'format' => 'json'
    );
 
-//url-ify the data for the POST
    $fields_string = '';
    foreach ($fields as $key => $value) {
       $fields_string .= $key . '=' . $value . '&';
@@ -26,12 +24,15 @@ function konora_do_reserved_area($atts, $content = null) {
 
    curl_setopt($ch, CURLOPT_URL, $url . $fields_string);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+   curl_setopt($ch, CURLOPT_HEADER, true);
 
    $output = curl_exec($ch);
 
    curl_close($ch);
 
-   if ($output != '"false"') {
+   list($header, $body) = explode("\r\n\r\n", $output, 2);
+   
+   if ($body != '"false"') {
       return $content;
    } else {
       return get_option('konora_access_denied_text', $default_access_denied_text);
@@ -41,8 +42,8 @@ function konora_do_reserved_area($atts, $content = null) {
 function konora_print_form($atts) {
    global $konora;
 
-   $style = $atts['style'] == '' ? 'vertical' : $atts['style'];
-   $btn_text = (isset($atts['button_text']) and $atts['button_text'] == '') ? $atts['button_text'] : 'Invia';
+   $style = (isset($atts['style']) and $atts['style'] == '') ? 'vertical' : $atts['style'];
+   $btn_text = (isset($atts['button_text']) and $atts['button_text'] != '') ? $atts['button_text'] : 'Invia';
    $label = (isset($atts['label']) and ( $atts['label'] == 'on' or ! $atts['label'] == '' )) ? TRUE : FALSE;
    $background = (isset($atts['background']) and $atts['background'] != '') ? 'background-color: ' . $atts['background'] : NULL;
    $color = (isset($atts['color']) and $atts['color'] != '') ? 'color: ' . $atts['color'] : NULL;
@@ -50,21 +51,93 @@ function konora_print_form($atts) {
    $text = (isset($atts['text']) and $atts['text'] != '') ? $atts['text'] : NULL;
    $btn_background = (isset($atts['button_background']) and $atts['button_background'] != '') ? 'background-color: ' . $atts['button_background'] : NULL;
    $btn_color = (isset($atts['button_color']) and $atts['button_color'] != '') ? 'color: ' . $atts['button_color'] : NULL;
-   $cirlce = $atts['circle'];
-    
+   $fields = (isset($atts['fields']) and $atts['fields'] != '') ? explode(';', $atts['fields']) : array('name', 'email');
+   $redirect = (isset($atts['redirect']) and $atts['redirect'] != '') ? $atts['redirect'] : NULL;
+
+   $sponsor = (defined('WP_ALLOW_MULTISITE') and WP_ALLOW_MULTISITE) ? get_userdata(get_user_id_from_string(get_option('admin_email')))->user_email : get_option('admin_email');
+
    $plugin_url = plugins_url(null, __FILE__);
    $css = plugins_url("css/$style.css", __FILE__);
 
-   wp_enqueue_script('konora', plugins_url( 'js/konora.js' , __FILE__ ), array('jquery'));
-
-   if ($atts['circle'] == "") {
+   if (!$atts['circle'] != '') {
       return '<span class="konora-error">error: no circle set!</span>';
    } else {
+      $cirlce = $atts['circle'];
+
       // Render the settings template
       ob_start();
       include(sprintf("%s/templates/form.php", dirname(__FILE__)));
       return ob_get_clean();
    }
+}
+
+function render_meta_box_content($post) {
+
+   wp_enqueue_script(
+           '', plugins_url('js/admin.js', __FILE__), array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker'), time(), true
+   );
+
+   wp_enqueue_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
+
+   wp_enqueue_script('media-upload'); //Provides all the functions needed to upload, validate and give format to files.
+   wp_enqueue_script('thickbox'); //Responsible for managing the modal window.
+   wp_enqueue_style('thickbox'); //Provides the styles needed for this window.
+   wp_enqueue_script('script', plugins_url('js/upload.js', __FILE__), array('jquery'), '', true); //It will initialize the parameters needed to show the window properly.
+//
+   //wp_enqueue_style('jquery-ui-datepicker');
+   // Add an nonce field so we can check for it later.
+   wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
+
+   $img_path = get_post_meta($post->ID, 'konora_lead_background_image', true);
+   $template = get_post_meta($post->ID, 'konora_lead_template', false);
+
+   // Render the settings template
+   include(sprintf("%s/templates/meta_box.php", dirname(__FILE__)));
+}
+
+function save_meta_box($post_id) {
+
+   /*
+    * We need to verify this came from the our screen and with proper authorization,
+    * because save_post can be triggered at other times.
+    */
+
+   // Check if our nonce is set.
+   if (!isset($_POST['myplugin_inner_custom_box_nonce']))
+      return $post_id;
+
+   $nonce = $_POST['myplugin_inner_custom_box_nonce'];
+
+   // Verify that the nonce is valid.
+   if (!wp_verify_nonce($nonce, 'myplugin_inner_custom_box'))
+      return $post_id;
+
+   // If this is an autosave, our form has not been submitted,
+   //     so we don't want to do anything.
+   if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+      return $post_id;
+
+   // Check the user's permissions.
+   if ('page' == $_POST['post_type']) {
+
+      if (!current_user_can('edit_page', $post_id))
+         return $post_id;
+   } else {
+
+      if (!current_user_can('edit_post', $post_id))
+         return $post_id;
+   }
+
+   /* OK, its safe for us to save the data now. */
+
+   // Sanitize the user input.
+   $img_path = sanitize_text_field($_POST['konora_lead_background_image']);
+   $template = sanitize_text_field($_POST['konora_lead_template']);
+   
+
+   // Update the meta field.
+   update_post_meta($post_id, 'konora_lead_background_image', $img_path);
+   update_post_meta($post_id, 'konora_lead_template', $template);
 }
 
 function konora_notify_new_post($post_id) {
@@ -177,22 +250,24 @@ function konora_registration_save($user_id) {
 
    $name = $_POST['user_login'];
    $email = $_POST['user_email'];
-   $sponsor = $_POST['konora_sponsor'];
-   $password = $_POST['password'];
-   $konora_login_circle = get_option('konora_login_circle', '');
 
-   $signup = get_option('konora_login_sponsor', '') ? '1' : '0';
+   /*
+     $sponsor = $_POST['konora_sponsor'];
+     $password = $_POST['password'];
+     $konora_login_circle = get_option('konora_login_circle', '');
+     $signup = get_option('konora_login_sponsor', '') ? '1' : '0';
 
-   $userdata = array();
+     $userdata = array();
 
-   $userdata['ID'] = $user_id;
-   if ($password !== '') {
-      $userdata['user_pass'] = $password;
-   }
-   $new_user_id = wp_update_user($userdata);
+     $userdata['ID'] = $user_id;
+     if ($password !== '') {
+     $userdata['user_pass'] = $password;
+     }
+     $new_user_id = wp_update_user($userdata);
 
-   update_user_meta($user_id, 'konora_password', $password);
-   update_user_meta($user_id, 'konora_email', $email);
+     update_user_meta($user_id, 'konora_password', $password);
+     update_user_meta($user_id, 'konora_email', $email);
+    */
 
-   file_get_contents("$konora/api/form/$konora_login_circle?name=$name&email=$email&sponsor=$sponsor&password=$password&signup=$signup");
+   file_get_contents("$konora/api/form/$konora_login_circle?name=$name&email=$email");
 }
