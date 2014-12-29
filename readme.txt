@@ -19,7 +19,6 @@ tuo blog con i servizzi messi a disposizione dal portale [Konora]: www.konora.co
 2. Attiva il plugin dal menu 'Plugins' in WordPress
 3. Apri la pagina 'Opzioni Konora' dal menu 'Impostazioni'
 
-
 == Screenshots ==
 
 1. Page of advertising
