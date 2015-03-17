@@ -1,8 +1,11 @@
 <label for="konora_lead_template">Template: </label>
+
 <select name="konora_lead_template">
-    <option value="1" <?= $template[0] == 1 ? 'selected' : '' ; ?>>Vuoto</option>
-    <option value="2" <?= $template[0] == 2 ? 'selected' : '' ; ?>>Template 2</option>
-    <option value="3" <?= $template[0] == 3 ? 'selected' : '' ; ?>>Template 3</option>
+    
+    <?php foreach ($templates as $template) : ?>
+      <option value="<?= $template['id']; ?>" <?= $select_template[0] == $template['id'] ? 'selected' : '' ; ?>><?= $template['name']; ?></option>
+    <?php endforeach; ?>
+    
 </select>
 
 <br />

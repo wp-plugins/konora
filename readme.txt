@@ -2,7 +2,7 @@
 Tags: konora, newsletter, autoresponder
 Requires at least: 3.4
 Tested up to: 3.9.1
-Stable tag: 0.7
+Stable tag: 0.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,11 +19,16 @@ tuo blog con i servizzi messi a disposizione dal portale [Konora]: www.konora.co
 2. Attiva il plugin dal menu 'Plugins' in WordPress
 3. Apri la pagina 'Opzioni Konora' dal menu 'Impostazioni'
 
+
 == Screenshots ==
 
 1. Page of advertising
 
 == Changelog ==
+
+= 0.8.2 =
+* Il cookie dello sponsor viene cancellato ogni volta che l'admin entra nel pannello
+* Divise le funzioni in public e admin
 
 = 0.7 =
 * Aggiunte le le pagine di tipo lead

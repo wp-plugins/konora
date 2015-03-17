@@ -1,4 +1,5 @@
-<?php
+<?php  
+
 
 function konora_do_reserved_area($atts, $content = null) {
    global $default_access_denied_text;
@@ -31,7 +32,7 @@ function konora_do_reserved_area($atts, $content = null) {
    curl_close($ch);
 
    list($header, $body) = explode("\r\n\r\n", $output, 2);
-   
+
    if ($body != '"false"') {
       return $content;
    } else {
@@ -42,7 +43,7 @@ function konora_do_reserved_area($atts, $content = null) {
 function konora_print_form($atts) {
    global $konora;
 
-   $style = (isset($atts['style']) and $atts['style'] == '') ? 'vertical' : $atts['style'];
+   $style = (array_key_exists('style', $atts) and $atts['style'] != '') ? $atts['style'] : 'vertical';
    $btn_text = (isset($atts['button_text']) and $atts['button_text'] != '') ? $atts['button_text'] : 'Invia';
    $label = (isset($atts['label']) and ( $atts['label'] == 'on' or ! $atts['label'] == '' )) ? TRUE : FALSE;
    $background = (isset($atts['background']) and $atts['background'] != '') ? 'background-color: ' . $atts['background'] : NULL;
@@ -51,14 +52,25 @@ function konora_print_form($atts) {
    $text = (isset($atts['text']) and $atts['text'] != '') ? $atts['text'] : NULL;
    $btn_background = (isset($atts['button_background']) and $atts['button_background'] != '') ? 'background-color: ' . $atts['button_background'] : NULL;
    $btn_color = (isset($atts['button_color']) and $atts['button_color'] != '') ? 'color: ' . $atts['button_color'] : NULL;
-   $fields = (isset($atts['fields']) and $atts['fields'] != '') ? explode(';', $atts['fields']) : array('name', 'email');
+   $inFields = (isset($atts['fields']) and $atts['fields'] != '') ? explode(';', $atts['fields']) : array('name', 'email');
    $redirect = (isset($atts['redirect']) and $atts['redirect'] != '') ? $atts['redirect'] : NULL;
 
-   $sponsor = (defined('WP_ALLOW_MULTISITE') and WP_ALLOW_MULTISITE) ? get_userdata(get_user_id_from_string(get_option('admin_email')))->user_email : get_option('admin_email');
+   $sponsor = array_key_exists('knr', $_GET) ?
+           $_GET['knr'] :
+           (array_key_exists('sponsor', $_COOKIE) ? $_COOKIE['sponsor'] : get_option('admin_email') );
 
    $plugin_url = plugins_url(null, __FILE__);
    $css = plugins_url("css/$style.css", __FILE__);
 
+   if (is_array($inFields)) {
+      foreach ($inFields as $key => $field) {
+         $required = strstr($field, '*') ? true : false;
+         $field = trim(str_replace('*', '', $field));
+
+         $fields[$field] = $required;
+      }
+   }
+   
    if (!$atts['circle'] != '') {
       return '<span class="konora-error">error: no circle set!</span>';
    } else {
@@ -89,7 +101,31 @@ function render_meta_box_content($post) {
    wp_nonce_field('myplugin_inner_custom_box', 'myplugin_inner_custom_box_nonce');
 
    $img_path = get_post_meta($post->ID, 'konora_lead_background_image', true);
-   $template = get_post_meta($post->ID, 'konora_lead_template', false);
+   $select_template = get_post_meta($post->ID, 'konora_lead_template', false);
+
+
+   /*
+    *  genera la lista dei lead nella cartella lead
+    * 
+    *  array = (id, name);
+    */
+   if ($directory_handle = opendir(plugin_dir_path(__FILE__) . 'lead/')) {
+      //Scorro l'oggetto fino a quando non è termnato cioè false
+      while (($file = readdir($directory_handle)) !== false) {
+
+         if ((!is_dir($file)) & ($file != ".") & ($file != "..")) {
+
+            list($name, $extension) = explode('.', $file);
+
+            if (($name != "") and strpos($name, "signle-lead") === false) {
+    
+               $templates[] = substr($name, 12);
+            } 
+         }
+      }
+      //Chiudo la lettura della directory.
+      closedir($directory_handle);
+   }
 
    // Render the settings template
    include(sprintf("%s/templates/meta_box.php", dirname(__FILE__)));
@@ -133,7 +169,7 @@ function save_meta_box($post_id) {
    // Sanitize the user input.
    $img_path = sanitize_text_field($_POST['konora_lead_background_image']);
    $template = sanitize_text_field($_POST['konora_lead_template']);
-   
+
 
    // Update the meta field.
    update_post_meta($post_id, 'konora_lead_background_image', $img_path);
@@ -270,4 +306,20 @@ function konora_registration_save($user_id) {
     */
 
    file_get_contents("$konora/api/form/$konora_login_circle?name=$name&email=$email");
+}
+
+if (!function_exists('second_level')) {
+
+   function second_level() {
+      $purl = parse_url("http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
+
+      $secondolivello = isset($purl['host']) ? $purl['host'] : '';
+
+      if (preg_match('/(?P<secliv>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $secondolivello, $regs)) {
+         return $regs['secliv'];
+      } else {
+         return false;
+      }
+   }
+
 }

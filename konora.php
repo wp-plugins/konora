@@ -4,12 +4,14 @@
  * Plugin Name: Form Raccogli Dati Konora
  * Plugin URI: http://blog.konora.com/plugin/
  * Description: Converti le visite al tuo sito in contatti per il tuo buisness
- * Version: 0.7
+ * Version: 0.8.2
  * Author: Konora ltd
  * Author URI: http://www.konora.com
  * License: GPLv2 or later
  */
+
 include_once plugin_dir_path(__FILE__) . 'function.php';
+include_once plugin_dir_path(__FILE__) . 'admin.php';
 include_once plugin_dir_path(__FILE__) . 'widget.php';
 include_once plugin_dir_path(__FILE__) . 'options.php';
 
@@ -27,6 +29,7 @@ add_shortcode('konora', 'konora_print_form');
 
 add_action('init', 'konora_init');
 add_action('admin_menu', 'konora_add_page');
+add_action('admin_init', 'konora_admin_init' );
 add_action('widgets_init', 'konora_widgets');
 add_action('add_meta_boxes', 'konora_add_meta_box');
 add_action('save_post', 'save_meta_box');
@@ -50,6 +53,16 @@ if (get_option('konora_publish_post', '') == 'on' and get_option('konora_newslet
 }
 
 function konora_init() {
+   if (array_key_exists('knr', $_GET) and ( $_GET['knr'] != '')) {
+
+      setcookie("sponsor", $_GET['knr'], time() + 3600 * 24 * 30, '/', '.' . second_level());
+   }
+
+   if (!array_key_exists('sponsor', $_COOKIE)) {
+
+      setcookie("sponsor", get_option('admin_email'), time() + 3600 * 24 * 30, '/', '.' . second_level());
+   }
+
    register_post_type('lead', array(
        'labels' => array(
            'name' => 'Konora Leads', /* Nome, al plurale, dell'etichetta del post type. */
@@ -97,9 +110,9 @@ function get_custom_post_type_template($single_template) {
 
       if (have_posts()) : while (have_posts()) : the_post();
 
-            $template =  get_post_meta(get_the_ID(), 'konora_lead_template', 1);
-            
-           $single_template = dirname(__FILE__) . '/lead/single-lead_' . $template[0] . '.php';
+            $template = get_post_meta(get_the_ID(), 'konora_lead_template', 1);
+
+            $single_template = dirname(__FILE__) . '/lead/single-lead_' . $template[0] . '.php';
 
          endwhile;
 
