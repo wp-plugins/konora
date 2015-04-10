@@ -7,7 +7,7 @@
 </script>
 
 <div id="konora-wrapper-<?= $style; ?>">
-    <form class="konora-form" action="<?= $konora; ?>/api/form/<?= $cirlce; ?>" method="GET" style="<?= $background; ?>;<?= $color; ?>;<?= $border_color; ?>">
+    <form class="konora-form" action="http://panel.konora.com/api/form/<?= $cirlce; ?>" method="GET" style="<?= $background; ?>;<?= $color; ?>;<?= $border_color; ?>">
 
         <?php if ($text != '') : ?>
            <p class="konora-text" style="display:block"><?= $text; ?></p>
@@ -63,6 +63,25 @@
            </p>
         <?php endif; ?>
 
+        <?php if (array_key_exists("address", $fields)) : ?>
+           <p>
+               <?php if ($label != '') : ?>
+                  <label for = "address">Indirizzo: </label>
+               <?php endif; ?>
+           <div>
+               <input id="konora-address" <?= $fields['address'] ? 'required' : ''; ?> placeholder="Via" name="address_street_1" type="text" >
+               <input id="konora-city" <?= $fields['address'] ? 'required' : ''; ?> placeholder="Città" name="address_city_1" type="text" >
+           </div>
+           <div>
+               <input id="konora-prov" <?= $fields['address'] ? 'required' : ''; ?> placeholder="Provincia" name="address_district_1">
+               <input id="konora-CAP" <?= $fields['address'] ? 'required' : ''; ?> placeholder="CAP" name="address_postcode_1" >
+           </div>
+           <div>
+               <input id="konora-state" <?= $fields['address'] ? 'required' : ''; ?> placeholder="Stato" name="address_state_1">
+           </div>
+           </p>
+        <?php endif; ?>
+
         <?php if (array_key_exists("note", $fields)) : ?>
            <p>
                <?php if ($label != '') : ?>
@@ -80,6 +99,24 @@
                <?php endif; ?>
 
                <input type="date" id="konora-birthday" <?= $fields['birthday'] ? 'required' : ''; ?>  name="konora-birthday" />
+           </p>
+        <?php endif; ?>
+
+        <?php if (array_key_exists("signup", $fields) and !is_null($fields['signup'])) : ?>
+           <p>
+               <input type="hidden" id="konora-signup" value="<?= $fields['signup']; ?>"  name="konora-signup" />
+           </p>
+        <?php endif; ?>
+           
+        <?php if (array_key_exists("pack", $fields) and !is_null($fields['pack'])) : ?>
+           <p>
+               <input type="hidden" id="konora-pack" value="<?= $fields['pack']; ?>"  name="konora-pack" />
+           </p>
+        <?php endif; ?>
+           
+        <?php if (array_key_exists("recurrence", $fields) and !is_null($fields['recurrence'])) : ?>
+           <p>
+               <input type="hidden" id="konora-recurrence" value="<?= $fields['recurrence']; ?>"  name="konora-recurrence" />
            </p>
         <?php endif; ?>
 

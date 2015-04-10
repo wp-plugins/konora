@@ -1,5 +1,4 @@
-<?php  
-
+<?php
 
 function konora_do_reserved_area($atts, $content = null) {
    global $default_access_denied_text;
@@ -70,7 +69,11 @@ function konora_print_form($atts) {
          $fields[$field] = $required;
       }
    }
-   
+
+   $fields['signup'] = (isset($atts['signup']) and $atts['signup'] != '') ? $atts['signup'] : NULL;
+   $fields['pack'] = (isset($atts['pack']) and $atts['pack'] != '') ? $atts['pack'] : NULL;
+   $fields['recurrence'] = (isset($atts['recurrence']) and $atts['recurrence'] != '') ? $atts['recurrence'] : NULL;
+
    if (!$atts['circle'] != '') {
       return '<span class="konora-error">error: no circle set!</span>';
    } else {
@@ -118,9 +121,9 @@ function render_meta_box_content($post) {
             list($name, $extension) = explode('.', $file);
 
             if (($name != "") and strpos($name, "signle-lead") === false) {
-    
+
                $templates[] = substr($name, 12);
-            } 
+            }
          }
       }
       //Chiudo la lettura della directory.

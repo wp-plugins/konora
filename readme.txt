@@ -2,7 +2,7 @@
 Tags: konora, newsletter, autoresponder
 Requires at least: 3.4
 Tested up to: 3.9.1
-Stable tag: 0.8.2
+Stable tag: 0.8.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,15 @@ tuo blog con i servizzi messi a disposizione dal portale [Konora]: www.konora.co
 1. Page of advertising
 
 == Changelog ==
+
+= 0.8.5 =
+* Correct some bugs
+
+= 0.8.4 =
+* Aggiunto l'opzione signup, recurrence e pack nei form
+
+= 0.8.3 =
+* Aggiunto l'indirizzo completo nel form
 
 = 0.8.2 =
 * Il cookie dello sponsor viene cancellato ogni volta che l'admin entra nel pannello
