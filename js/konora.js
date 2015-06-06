@@ -6,32 +6,32 @@ jQuery(function ($) {
 
         var $form = $(this);
         $form.addClass('knrActive');
-        
-        $.get("http://panel.konora.com/api/form_stats", { circle_id: circle_id });
+
+        $.get("http://panel.konora.com/api/form_stats", {
+            circle_id: circle_id
+        });
 
         $form.submit(function (e) {
             e.preventDefault();
 
-            var name = $form.find('#konora-name').val();
-            var surname = $form.find('#konora-surname').val();
-            var email = $form.find('#konora-email').val();
-            var phone = $form.find('#konora-phone').val();
-            var street = $form.find('#konora-address').val();
-            var city = $form.find('#konora-city').val();
-            var district = $form.find('#konora-prov').val();
-            var postcode = $form.find('#konora-CAP').val();
-            var state = $form.find('#state').val();
-            var note = $form.find('#konora-note').val();
-            var sponsor = $form.find('#konora-sponsor').val();
-            var birthday = $form.find('#konora-birthday').val();
-            var redirect = $form.find('#konora-redirect').val();
-            var signup = $form.find('#konora-signup').val();
-            var pack = $form.find('#konora-pack').val();
-            var recurrence = $form.find('#konora-recurrence').val();
+            var name = $form.find('#name').val();
+            var surname = $form.find('#surname').val();
+            var email = $form.find('#email').val();
+            var phone = $form.find('#phone').val();
+            var street = $form.find('#address_street_1').val();
+            var city = $form.find('#address_city_1').val();
+            var district = $form.find('#address_district_1').val();
+            var postcode = $form.find('#address_postcode_1').val();
+            var state = $form.find('#address_state_1').val();
+            var note = $form.find('#note').val();
+            var sponsor = $form.find('#sponsor').val();
+            var birthday = $form.find('#birthday_day').val();
+            var redirect = $form.find('#redirect').val();
+            var signup = $form.find('#signup').val();
+            var pack = $form.find('#pack').val();
+            var recurrence = $form.find('#recurrence').val();
             var url = $form.attr('action');
 
-            SetCookie('email', email, 365);
-            
             var ajaxData = {
                 'name': name !== 'undefined' ? name : '',
                 'surname': surname,
@@ -47,50 +47,33 @@ jQuery(function ($) {
                 'birthday_day': birthday,
                 'signup': signup,
                 'pack': pack,
-                'recurrence': recurrence
+                'recurrence': recurrence,
+                'id_circle': circle_id
             };
 
-            $.ajax({
-                url: url,
-                type: 'GET',
-                data: ajaxData
-            })
+            if ((email.indexOf('hotmail.com') > -1) || (email.indexOf('hotmail.it') > -1)) {
+                alert('');
+            } else {
+
+                $.ajax({
+                        url: url,
+                        type: 'GET',
+                        data: ajaxData
+                    })
                     .error(function () {
                         alert('Si è verificato un errore. Si prega di riprovare più tardi.');
                     })
                     .done(function () {
-                        $.get("http://panel.konora.com/api/form_stats", { circle_id: circle_id, compiled: 1});
-                
-                        if (redirect  !== undefined) {
+                        if (redirect !== undefined) {
                             window.location.href = redirect;
                         } else {
                             $form.html('Il form è stato inviato correttamente!');
                         }
                     });
-
-            $form.html('Stiamo inviando i tuoi dati...');
+                
+                $form.html('Stiamo inviando i tuoi dati...');
+            }    
         });
+
     });
 });
-
-function SetCookie(cookieName, cookieValue, nDays) {
-    var today = new Date();
-    var expire = new Date();
-    var domain;
-
-    var host = window.location.host.split(".");
-    if (host.length > 2) {
-        domain = host.pop();
-        domain = '.' + host.pop() + '.' + domain;
-    } else {
-        domain = '.' + host;
-    }
-
-    if (nDays === null || nDays === 0) {
-        nDays = 1;
-    }
-
-    expire.setTime(today.getTime() + 3600000 * 24 * nDays);
-    document.cookie = cookieName + "=" + escape(cookieValue)
-            + ";expires=" + expire.toGMTString() + ";domain=" + domain;
-}

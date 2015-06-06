@@ -2,7 +2,7 @@
 Tags: konora, newsletter, autoresponder
 Requires at least: 3.4
 Tested up to: 3.9.1
-Stable tag: 0.8.5
+Stable tag: 0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,13 @@ tuo blog con i servizzi messi a disposizione dal portale [Konora]: www.konora.co
 
 == Changelog ==
 
+= 0.9 =
+* Salvataggio in locale dei dati inviati
+* Il form funziona anche senza il supporto javascript
+* Le pagine di tipo leads possono essere disabilitate dall'opzione apposita
+* Migliorate le prestazioni del plugin
+* Corretti bug minori
+
 = 0.8.5 =
 * Correct some bugs
 
@@ -48,7 +55,7 @@ tuo blog con i servizzi messi a disposizione dal portale [Konora]: www.konora.co
 * Corretti bug minori
 
 = 0.6 =
-* Velocizzato l'esecuzione del plugin
+* Migliorate le prestazioni del plugin
 * Migliorato il supporto a form multipli all'interno della stessa pagina
 * Sostituito l'uso delle librerie curl con l'istruzione file_get_contents() per migliorare la compatibilita'
 * Aggiunto il pdf della documentazione all'interno del plugin

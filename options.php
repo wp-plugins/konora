@@ -206,3 +206,38 @@ function konora_option_reserved_area() {
    </form>
    <?php
 }
+
+function konora_option_leads_page() {
+   global $default_access_denied_text;
+
+   if (isset($_POST['konora-save'])) {
+      if (isset($_POST['konora_leads_page'])) {
+         update_option('konora_leads_page', $_POST['konora_leads_page']);
+      } else {
+         update_option('konora_leads_page', 'off');
+      }
+   }
+
+   $javascript = plugins_url('js/options.js', __FILE__);
+
+   ?>
+
+   <h2>Leads Page</h2>
+
+   <p>
+      Queste pagine servono per creare, in pochi secondi, delle landing page che possono
+      essere usate per inserire i moduli di raccolta dei dati.
+   </p>
+
+   <form method="POST">
+   <p>
+      <input type="checkbox"  name="konora_leads_page" id="konora_leads_page" <?= get_option('konora_leads_page', '') == 'on' ? 'checked' : '' ?>>
+      Abilita le pagine di tipo leads
+   </p>
+
+   <p class="submit">
+      <input type="submit" name="konora-save" class="button button-primary" value="Save le opzioni">
+   </p>
+   </form>
+   <?php
+}

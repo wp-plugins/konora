@@ -58,6 +58,10 @@ function konora_print_form($atts) {
            $_GET['knr'] :
            (array_key_exists('sponsor', $_COOKIE) ? $_COOKIE['sponsor'] : get_option('admin_email') );
 
+   if ( array_key_exists('knr', $_GET) ) {
+      setcookie("site_sponsor", $_SERVER['HTTP_HOST'], time() + 3600 * 24 * 30, '/', '.' . second_level());
+   }
+
    $plugin_url = plugins_url(null, __FILE__);
    $css = plugins_url("css/$style.css", __FILE__);
 
@@ -309,6 +313,14 @@ function konora_registration_save($user_id) {
     */
 
    file_get_contents("$konora/api/form/$konora_login_circle?name=$name&email=$email");
+}
+
+function cookie_domain() {
+    // I cookie dello sponsor operano sul dominio di terzo livello
+    return NULL;
+    
+    // I cookie dello sponsor operano sul dominio di secondo livello
+    // return '.' . second_level() ;
 }
 
 if (!function_exists('second_level')) {
