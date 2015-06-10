@@ -44,9 +44,6 @@ list($version,$httpCode,$msg) = explode(' ',$http_response_header[0], 3);
 
 http_response_code($httpCode);
 
-$string = 'http://panel.konora.com/api/form_stats?circle_id=' . $id_circle . '&compiled=1';
-file_get_contents($string);
-
 setcookie("email", $email, NULL, '/', '.' . cookie_domain());
 
 global $wpdb;

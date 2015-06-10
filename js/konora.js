@@ -51,7 +51,9 @@ jQuery(function ($) {
                 'id_circle': circle_id
             };
 
-            if ((email.indexOf('hotmail.com') > -1) || (email.indexOf('hotmail.it') > -1)) {
+            if (email == '') {
+                alert('Inserire una email corretta!!!!');
+            } else if ((email.indexOf('hotmail.com') > -1) || (email.indexOf('hotmail.it') > -1)) {
                 alert('');
             } else {
 
