@@ -2,7 +2,7 @@
 Tags: konora, newsletter, autoresponder
 Requires at least: 3.4
 Tested up to: 3.9.1
-Stable tag: 0.9.2
+Stable tag: 0.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,9 @@ tuo blog con i servizzi messi a disposizione dal portale [Konora]: www.konora.co
 1. Page of advertising
 
 == Changelog ==
+
+= 0.9.3 =
+* Correct bug in form.php
 
 = 0.9.2 =
 * Sostituita la chiamata js alle statistiche con il pixel tracking

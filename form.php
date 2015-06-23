@@ -1,7 +1,9 @@
 <?php
 
-ini_set('display_errors','On');
-error_reporting(E_ALL);
+header('Access-Control-Allow-Origin: *');
+
+//ini_set('display_errors','On');
+//error_reporting(E_ALL);
 
 $name = array_key_exists('name', $_GET) ? $_GET['name'] : NULL;
 $surname = array_key_exists('surname', $_GET) ? $_GET['surname'] : NULL;
