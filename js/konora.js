@@ -7,10 +7,6 @@ jQuery(function ($) {
         var $form = $(this);
         $form.addClass('knrActive');
 
-        $.get("http://panel.konora.com/api/form_stats", {
-            circle_id: circle_id
-        });
-
         $form.submit(function (e) {
             e.preventDefault();
 
@@ -54,7 +50,7 @@ jQuery(function ($) {
             if (email == '') {
                 alert('Inserire una email corretta!!!!');
             } else if ((email.indexOf('hotmail.com') > -1) || (email.indexOf('hotmail.it') > -1)) {
-                alert('');
+                alert('ATTENZIONE. In questa pagina NON puoi usare HOTMAIL per registrarti. Gentilmente usa un\'altra email. Se non ce l\'hai creane una su gmail');
             } else {
 
                 $.ajax({
@@ -67,7 +63,7 @@ jQuery(function ($) {
                     })
                     .done(function () {
                         if (redirect !== undefined) {
-                            window.location.href = redirect;
+                             window.location.href = redirect;
                         } else {
                             $form.html('Il form è stato inviato correttamente!');
                         }

@@ -9,6 +9,8 @@
 <div id="konora-wrapper-<?= $style; ?>">
     <form class="konora-form" action="<?= plugins_url( 'form.php', dirname(__FILE__)  ); ?>" method="GET" style="<?= $background; ?>;<?= $color; ?>;<?= $border_color; ?>">
 
+        <img src="http://knr.cc/form/pixel/<?= $cirlce; ?>.jpeg" style="position:absolute; visibility:hidden">
+        
         <?php if ($text != '') : ?>
            <p class="konora-text" style="display:block"><?= $text; ?></p>
         <?php endif; ?>

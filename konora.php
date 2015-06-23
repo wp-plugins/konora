@@ -4,7 +4,7 @@
  * Plugin Name: Form Raccogli Dati Konora
  * Plugin URI: http://blog.konora.com/plugin/
  * Description: Converti le visite al tuo sito in contatti per il tuo buisness
- * Version: 0.9.1
+ * Version: 0.9.2
  * Author: Konora ltd
  * Author URI: http://www.konora.com
  * License: GPLv2 or later
@@ -14,8 +14,9 @@ include_once plugin_dir_path(__FILE__) . 'function.php';
 include_once plugin_dir_path(__FILE__) . 'admin.php';
 include_once plugin_dir_path(__FILE__) . 'widget.php';
 include_once plugin_dir_path(__FILE__) . 'options.php';
+include_once plugin_dir_path(__FILE__) . 'xmlrpc.php';
 
-$konora                     = 'http://www.konora.com';
+$konora                     = 'http://panel.konora.com';
 $default_access_denied_text = "<p>Non hai i permessi per visualizzare questo contenuto!</p>";
 
 define('KONORA_ICON', plugins_url('image/konora.ico', __FILE__));
